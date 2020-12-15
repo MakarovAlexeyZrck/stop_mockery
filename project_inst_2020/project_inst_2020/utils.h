@@ -11,7 +11,7 @@ T input_check(T min, T max)
 	{
 		cin.clear();
 		cin.ignore(10000, '\n');
-		cout << "Retry";
+		cout << "--- Некорректный ввод. Повторите ввод: ";
 	}
 
 	return x;

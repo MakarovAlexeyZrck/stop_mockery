@@ -35,3 +35,10 @@
 *.opendb
 *.db-shm
 *.db
+*.pdb
+*.idb
+*.tlog
+project_inst_2020/.vs/project_inst_2020/v16/.suo
+*.ilk
+*.recipe
+*.log

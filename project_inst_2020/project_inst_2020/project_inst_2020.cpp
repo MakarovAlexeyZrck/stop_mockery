@@ -3,9 +3,14 @@
 
 #include <iostream>
 
+#include "utils.h"
+
+using namespace std;
+
 int main()
 {
-    std::cout << "Hello World!\n";
+    cout << "Hello World!\n";
+    input_check(1, 2);
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

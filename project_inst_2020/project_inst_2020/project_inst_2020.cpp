@@ -5,7 +5,7 @@
 using namespace std;
 
 
-// Печатаем меню в консоль
+// Печатаем главное меню в консоль
 void print_menu() {
 
 	cout << "1. Добавить трубу или КС" << endl
@@ -19,6 +19,20 @@ void print_menu() {
 		 << "9. Загрузить данные из файла" << "\n"
 		 << "0. Выйти" << "\n"
 		 << "--- Введите действие: ";
+}
+
+// Печатаем вторичное меню в консоль
+int print_additional_menu() {
+
+	cout << "0. Главное меню" << endl
+		 << "1. Труба" << endl
+		 << "2. КС" << endl
+		 << "--- Введите действие: ";
+
+	int user_point;
+	user_point = input_check(0, 2);
+
+	return user_point;
 }
 
 int main()

@@ -23,6 +23,7 @@ void print_menu() {
 		 << "0. Выйти" << endl;
 }
 
+
 // Печатаем вторичное меню в консоль
 int print_additional_menu() {
 
@@ -36,10 +37,47 @@ int print_additional_menu() {
 	return user_point;
 }
 
+
+// Управление ручным добавлением
+void manual_add_elements(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
+
+	int small_choise = print_additional_menu();
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+	else if (small_choise == 1) {
+		int id = trumpet::MaxID;
+		trumpets_f.emplace(id, trumpet());
+		cin >> trumpets_f[id];
+	}
+	else if (small_choise == 2) {
+		int id = ks::MaxID;
+		ks_s_f.emplace(id, ks());
+		cin >> ks_s_f[id];
+	}
+
+}
+
+
+// Просмотр всех элементов
+template <typename T>
+void show_elements(string object_name, T data) {
+
+	if (data.size() == 0) {
+		cout << object_name << " ещё не добавлены" << endl;
+	}
+	else {
+		for (const auto& item : data) {
+			cout << item.second << endl;
+		}
+	}
+}
+
+
 int main()
 {
 
-	// Хранение данных
 	unordered_map<int, trumpet> trumpets;
 	unordered_map<int, ks> ks_s;
 
@@ -62,13 +100,13 @@ int main()
 		}
 
 		case 1: {
-			int id = ks::MaxID;
-			ks_s.emplace(id, ks());
-			cin >> ks_s[id];
+			manual_add_elements(trumpets, ks_s);
 			break;
 		}
 
 		case 2: {
+			show_elements("Трубы", trumpets);
+			show_elements("КС", ks_s);
 			break;
 		}
 

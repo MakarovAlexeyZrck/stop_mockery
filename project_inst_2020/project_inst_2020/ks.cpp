@@ -16,7 +16,7 @@ ks::ks() {
 }
 
 
-std::istream& operator>>(std::istream& in, ks& cs)
+std::istream& operator >> (std::istream& in, ks& cs)
 {
 	cout << "Введите наименование КС: ";
 	cin.get();
@@ -26,10 +26,12 @@ std::istream& operator>>(std::istream& in, ks& cs)
 	cs.active_workshops = input_value("Введите число активных цехов КС: ", 0, cs.count_workshops);
 	cs.efficiency = input_value("Введите эффективность КС: ", 0, 100);
 
+	cout << "Новая КС создана" << endl << endl;
+
 	return in;
 }
 
-std::ostream& operator<<(std::ostream& out, const ks& cs)
+std::ostream& operator << (std::ostream& out, const ks& cs)
 {
 	out << "КС: #" << cs.id << endl
 		<< "Наименование КС: " << cs.ks_name << endl
@@ -38,5 +40,5 @@ std::ostream& operator<<(std::ostream& out, const ks& cs)
 		<< "Эффективность КС: " << cs.efficiency << endl << endl;
 
 	return out;
-	// TODO: вставьте здесь оператор return
+
 }

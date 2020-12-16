@@ -9,6 +9,42 @@
 using namespace std;
 
 
+// Поиск по заданному параметру
+template<class T, typename T_param>
+using Filter = bool(*)(const T& obj, T_param param);
+
+template<class T, typename T_param>
+vector<int> FindObjectsByFilter(const unordered_map<int, T>& m, Filter<T, T_param> f, T_param param) {
+
+	vector <int> result;
+	for (const auto& item : m) {
+		if (f(item.second, param))
+			result.push_back(item.first);
+	}
+	return result;
+}
+
+
+template <class T>
+bool CheckByID(const T& p, int param) {
+	return p.id == param;
+}
+
+bool CheckByIsBroken(const trumpet& p, bool param) {
+	return p.is_broken == param;
+}
+
+bool CheckByName(const ks& cs, string param) {
+	return cs.ks_name == param;
+}
+
+bool CheckByPercentOfWorkshops(const ks& cs, double param) {
+	double percentage_of_number_workshops = 1.0 - cs.active_workshops / (double)cs.count_workshops;
+	return (abs(percentage_of_number_workshops - param / 100.0) < 0.0001);
+}
+
+
+
 // Печатаем главное меню в консоль
 void print_menu() {
 
@@ -29,8 +65,8 @@ void print_menu() {
 int print_additional_menu(string msg1, string msg2) {
 
 	cout << "0. Главное меню" << endl
-		 << "1." << msg1 << endl
-		 << "2." << msg2 << endl;
+		 << "1. " << msg1 << endl
+		 << "2. " << msg2 << endl;
 
 	int user_point;
 	user_point = input_value("--- Введите действие: ", 0, 2);
@@ -183,6 +219,76 @@ void batch_trumpets_editor(unordered_map<int, trumpet>& c_t) {
 
 }
 
+
+// Фильтр для труб
+void trumpets_filter(const unordered_map<int, trumpet>& trumpets_f) {
+
+	int small_choise = print_additional_menu("Поиск по id", "Поиск по статусу");
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+
+	else if (small_choise == 1) {
+		int research_id = input_value("Введите id для поиска: ", 0, 1000);
+		if (research_id > trumpet::MaxID) {
+			cout << "Нет объектов, соответствующих заданным критериям поиска" << endl << endl;
+		}
+		else {
+			for (int i : FindObjectsByFilter(trumpets_f, CheckByID, research_id)) {
+				cout << trumpets_f.at(i) << endl;
+			}
+		}
+	}
+
+	else if (small_choise == 2) {
+		bool is_broken_status_to_find;
+		is_broken_status_to_find = input_value("Состояние трубы? [1 - сломана, 0 - работает]: ", false, true);
+		bool was_found = false;
+		for (int i : FindObjectsByFilter(trumpets_f, CheckByIsBroken, is_broken_status_to_find)) {
+			cout << trumpets_f.at(i) << endl;
+			was_found = true;
+		}
+		if (!was_found) cout << "Нет объектов, соответствующих заданным критериям поиска" << endl << endl;
+	}
+
+}
+
+
+// Фильтр для КС
+void trumpets_filter(const unordered_map<int, ks>& cs_set) {
+
+	int small_choise = print_additional_menu("Поиск по имени", "Поиск по проценту задействованных цехов");
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+
+	else if (small_choise == 1) {
+		string name_to_find;
+		cout << "Введите имя КС: ";
+		cin.get();
+		getline(cin, name_to_find);
+		for (int i : FindObjectsByFilter(cs_set, CheckByName, name_to_find)) {
+			cout << cs_set.at(i) << endl;
+		}
+	}
+
+	else if (small_choise == 2) {
+		double percentage_to_find;
+		percentage_to_find = input_value("Введите искомый процесс (0-100%): ", 0.0, 100.0);
+		bool was_found = false;
+		for (int i : FindObjectsByFilter(cs_set, CheckByPercentOfWorkshops, percentage_to_find)) {
+			cout << cs_set.at(i) << endl;
+			was_found = true;
+		}
+
+		if (!was_found) cout << "Нет объектов, соответствующих заданным критериям поиска" << endl << endl;
+
+	}
+}
+
+
 // Чтение данных из файла
 void read_data(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
 
@@ -311,10 +417,12 @@ int main()
 		}
 
 		case 5: {
+			trumpets_filter(trumpets);
 			break;
 		}
 
 		case 6: {
+			trumpets_filter(ks_s);
 			break;
 		}
 

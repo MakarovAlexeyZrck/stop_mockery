@@ -42,37 +42,3 @@ void delete_object(unordered_map<int, T1>& active_element) {
 
 }
 
-// Поиск по заданному параметру
-template<class T, typename T_param>
-using Filter = bool(*)(const T& obj, T_param param);
-
-template<class T, typename T_param>
-vector<int> FindObjectsByFilter(const unordered_map<int, T>& m, Filter<T, T_param> f, T_param param) {
-
-	vector <int> result;
-	for (const auto& item : m) {
-		if (f(item.second, param))
-			result.push_back(item.first);
-	}
-	return result;
-}
-
-
-template <class T>
-bool CheckByID(const T& p, unsigned int param) {
-	return p.id == param;
-}
-
-bool CheckByIsBroken(const trumpet& p, bool param) {
-	return p.is_broken == param;
-}
-
-bool CheckByName(const ks& cs, string param) {
-	return cs.ks_name == param;
-}
-
-bool CheckByPercentOfWorkshops(const ks& cs, double param) {
-	double percentage_of_number_workshops = 1.0 - cs.active_workshops / (double)cs.count_workshops;
-	return (abs(percentage_of_number_workshops - param / 100.0) < 0.0001);
-}
-

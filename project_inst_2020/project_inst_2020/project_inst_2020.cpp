@@ -3,6 +3,7 @@
 
 #include "utils.h"
 #include "trumpet.h"
+#include "ks.h"
 
 using namespace std;
 
@@ -40,6 +41,7 @@ int main()
 
 	// Хранение данных
 	unordered_map<int, trumpet> trumpets;
+	unordered_map<int, ks> ks_s;
 
 	// Русский язык в консоли
 	setlocale(LC_ALL, "Russian");
@@ -60,9 +62,9 @@ int main()
 		}
 
 		case 1: {
-			int id = trumpet::MaxID;
-			trumpets.emplace(id, trumpet());
-			cin >> trumpets[id];
+			int id = ks::MaxID;
+			ks_s.emplace(id, ks());
+			cin >> ks_s[id];
 			break;
 		}
 

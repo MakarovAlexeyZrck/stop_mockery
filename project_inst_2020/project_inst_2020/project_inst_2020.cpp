@@ -1,6 +1,8 @@
 ﻿#include <iostream>
+#include <unordered_map>
 
 #include "utils.h"
+#include "trumpet.h"
 
 using namespace std;
 
@@ -17,8 +19,7 @@ void print_menu() {
 		 << "7. Редактировать трубы пакетно" << "\n"
 		 << "8. Сохранить данные в файл" << "\n"
 		 << "9. Загрузить данные из файла" << "\n"
-		 << "0. Выйти" << "\n"
-		 << "--- Введите действие: ";
+		 << "0. Выйти" << endl;
 }
 
 // Печатаем вторичное меню в консоль
@@ -26,17 +27,20 @@ int print_additional_menu() {
 
 	cout << "0. Главное меню" << endl
 		 << "1. Труба" << endl
-		 << "2. КС" << endl
-		 << "--- Введите действие: ";
+		 << "2. КС" << endl;
 
 	int user_point;
-	user_point = input_check(0, 2);
+	user_point = input_value("--- Введите действие: ", 0, 2);
 
 	return user_point;
 }
 
 int main()
 {
+
+	// Хранение данных
+	unordered_map<int, trumpet> trumpets;
+
 	// Русский язык в консоли
 	setlocale(LC_ALL, "Russian");
 
@@ -47,7 +51,7 @@ int main()
 		print_menu();
 
 		// Обработка ввода пользователя
-		switch (input_check(0, 9))
+		switch (input_value("--- Введите действие: ", 0, 9))
 		{
 
 		case 0: {
@@ -56,6 +60,9 @@ int main()
 		}
 
 		case 1: {
+			int id = trumpet::MaxID;
+			trumpets.emplace(id, trumpet());
+			cin >> trumpets[id];
 			break;
 		}
 

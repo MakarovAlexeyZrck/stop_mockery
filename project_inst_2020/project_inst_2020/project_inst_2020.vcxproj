@@ -140,8 +140,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="project_inst_2020.cpp" />
+    <ClCompile Include="trumpet.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="trumpet.h" />
     <ClInclude Include="utils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -18,9 +18,15 @@
     <ClCompile Include="project_inst_2020.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="trumpet.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="utils.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="trumpet.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>

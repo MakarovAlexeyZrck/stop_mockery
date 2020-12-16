@@ -13,7 +13,7 @@ public:
 	static int MaxID;
 	double length;
 	double diameter;
-	bool is_broken;
+	bool is_broken = 0;
 
 	trumpet();
 	~trumpet();

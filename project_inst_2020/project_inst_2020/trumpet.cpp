@@ -21,7 +21,7 @@ ostream& operator << (ostream& out, const trumpet& t)
 	out << "Труба: #" << t.id << endl
 		<< "Длина трубы: " << t.length << endl
 		<< "Диаметр трубы: " << t.diameter << endl
-		<< "Статус трубы: " << t.is_broken << endl;
+		<< "Статус трубы: " << (t.is_broken ? "В ремонте!" : "В работе!") << endl;
 
 	return out;
 }

@@ -6,10 +6,10 @@
 
 class trumpet
 {
-private:
-	int id;
+
 
 public:
+	int id;
 	static int MaxID;
 	double length;
 	double diameter;

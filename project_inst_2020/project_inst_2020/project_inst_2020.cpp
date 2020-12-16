@@ -108,7 +108,6 @@ void update_trumpet(unordered_map<int, trumpet>& trumpets_f) {
 	}
 }
 
-
 // Редактирвоание КС
 void update_ks(unordered_map<int, ks>& ks_f) {
 
@@ -138,6 +137,50 @@ void update_objects(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, 
 	else if (small_choise == 2) {
 		update_ks(ks_s_f);
 	}
+}
+
+
+// Редактировать трубы с slice id
+void edit_slice_id(unordered_map<int, trumpet>& c_t) {
+
+	int begin_slice = input_value("Введите начальный элемент среза: ", 0, trumpet::MaxID);
+	int end_slice = input_value("Введите конечный элемент среза: ", 0, trumpet::MaxID);
+
+	int counter = 0;
+	for (auto& item : c_t) {
+
+		if (item.second.id >= begin_slice && item.second.id <= end_slice) {
+			item.second.trumpet_mode();
+		}
+		counter++;
+	}
+
+}
+
+// Пакетное редактирование труб
+void batch_trumpets_editor(unordered_map<int, trumpet>& c_t) {
+
+	int small_choise = print_additional_menu("Редактировать все", "Редактировать набор");
+
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+	else if (small_choise == 1) {
+
+		for (auto& item : c_t) {
+			item.second.trumpet_mode();
+		}
+
+		cout << "Все трубы отредактированы ... " << endl << endl;
+
+	}
+	else if (small_choise == 2) {
+		edit_slice_id(c_t);
+
+		cout << "Пакет труб отредактирован ... " << endl << endl;
+	}
+
 }
 
 // Чтение данных из файла
@@ -276,6 +319,7 @@ int main()
 		}
 
 		case 7: {
+			batch_trumpets_editor(trumpets);
 			break;
 		}
 

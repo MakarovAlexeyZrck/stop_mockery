@@ -76,6 +76,24 @@ void show_elements(string object_name, const T data) {
 }
 
 
+// Контроллер для удаления элементов
+void delete_controller(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
+
+	int small_choise = print_additional_menu();
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+	else if (small_choise == 1) {
+		delete_object(trumpets_f);
+	}
+	else if (small_choise == 2) {
+		delete_object(ks_s_f);
+	}
+
+}
+
+
 // Чтение данных из файла
 void read_data(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
 
@@ -88,9 +106,9 @@ void read_data(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& 
 		cout << "Файл не может быть открыт!" << endl << endl;
 	else {
 		string buff;
-
 		while (fin >> buff)
 		{
+
 			if (buff == "t")
 			{
 				trumpet t;
@@ -98,14 +116,15 @@ void read_data(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& 
 				int id = trumpet::MaxID;
 				trumpets_f.emplace(id, t);
 			}
+
 			else if (buff == "ks") {
 				ks c_ks;
 				fin >> c_ks.ks_name >> c_ks.count_workshops >> c_ks.active_workshops >> c_ks.efficiency;
 				int id = ks::MaxID;
 				ks_s_f.emplace(id, c_ks);
 			}
-		}
 
+		}
 		cout << "Данные успешно прочитаны ..." << endl << endl;
 	}
 
@@ -149,11 +168,10 @@ void write_data(const unordered_map<int, trumpet>& trumpets_f, const unordered_m
 				save_ks(fout, item.second);
 			}
 		}
+
 		cout << "Данные отправлены в файл ... " << endl << endl;
 	}
-
 	fout.close();
-
 }
 
 
@@ -187,6 +205,7 @@ int main()
 		}
 
 		case 2: {
+			cout << "Информация об объектах в программе" << endl << endl;
 			show_elements("Трубы", trumpets);
 			show_elements("КС", ks_s);
 			break;
@@ -197,6 +216,7 @@ int main()
 		}
 
 		case 4: {
+			delete_controller(trumpets, ks_s);
 			break;
 		}
 

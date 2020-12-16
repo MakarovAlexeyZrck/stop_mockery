@@ -76,6 +76,24 @@ void show_elements(string object_name, const T data) {
 }
 
 
+// Контроллер для удаления элементов
+void delete_controller(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
+
+	int small_choise = print_additional_menu();
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+	else if (small_choise == 1) {
+		delete_object(trumpets_f);
+	}
+	else if (small_choise == 2) {
+		delete_object(ks_s_f);
+	}
+
+}
+
+
 // Чтение данных из файла
 void read_data(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
 
@@ -187,6 +205,7 @@ int main()
 		}
 
 		case 2: {
+			cout << endl << "Информация об объектах в программе" << endl << endl;
 			show_elements("Трубы", trumpets);
 			show_elements("КС", ks_s);
 			break;
@@ -197,6 +216,7 @@ int main()
 		}
 
 		case 4: {
+			delete_controller(trumpets, ks_s);
 			break;
 		}
 

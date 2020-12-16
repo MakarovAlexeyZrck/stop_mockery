@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -19,4 +20,21 @@ T input_value(string msg, T min, T max)
 	}
 
 	return x;
+}
+
+
+// Функция по удалениию элементов
+template <typename T1>
+void delete_object(unordered_map<int, T1>& active_element) {
+
+	int id = input_value("Идентификатор удаляемого объекта: ", 0, 1000);
+
+	if (active_element.count(id) == 0) {
+		cout << "Проверьте идентификатор, объекта с заданным идентификатором не существует" << endl << endl;
+	}
+	else {
+		active_element.erase(id);
+		cout << "Объект успешно удален ... " << endl << endl;
+	}
+
 }

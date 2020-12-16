@@ -21,5 +21,7 @@ public:
 	friend std::istream& operator >> (std::istream& in, ks& cs);
 	friend std::ostream& operator << (std::ostream& out, const ks& cs);
 
+	void edit_ks();
+
 };
 

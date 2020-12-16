@@ -16,6 +16,11 @@ trumpet::trumpet() {
 trumpet::~trumpet() {
 }
 
+void trumpet::trumpet_mode()
+{
+	is_broken = !is_broken;
+}
+
 ostream& operator << (ostream& out, const trumpet& t)
 {
 	out << "Труба: #" << t.id << endl

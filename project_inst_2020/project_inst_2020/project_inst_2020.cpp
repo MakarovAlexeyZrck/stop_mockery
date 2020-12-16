@@ -26,11 +26,11 @@ void print_menu() {
 
 
 // Печатаем вторичное меню в консоль
-int print_additional_menu() {
+int print_additional_menu(string msg1, string msg2) {
 
 	cout << "0. Главное меню" << endl
-		 << "1. Труба" << endl
-		 << "2. КС" << endl;
+		 << "1." << msg1 << endl
+		 << "2." << msg2 << endl;
 
 	int user_point;
 	user_point = input_value("--- Введите действие: ", 0, 2);
@@ -42,7 +42,7 @@ int print_additional_menu() {
 // Управление ручным добавлением
 void manual_add_elements(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
 
-	int small_choise = print_additional_menu();
+	int small_choise = print_additional_menu("Труба", "КС");
 
 	if (small_choise == 0) {
 		cout << "Выполнен выход в начальное меню ... " << endl << endl;
@@ -79,7 +79,7 @@ void show_elements(string object_name, const T data) {
 // Контроллер для удаления элементов
 void delete_controller(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
 
-	int small_choise = print_additional_menu();
+	int small_choise = print_additional_menu("Труба", "КС");
 
 	if (small_choise == 0) {
 		cout << "Выполнен выход в начальное меню ... " << endl << endl;
@@ -93,6 +93,52 @@ void delete_controller(unordered_map<int, trumpet>& trumpets_f, unordered_map<in
 
 }
 
+
+// Редактирование трубы
+void update_trumpet(unordered_map<int, trumpet>& trumpets_f) {
+
+	int trumpet_id = input_value("Введите идентификатор трубы: ", 0, 1000);
+
+	if (trumpets_f.count(trumpet_id) != 0) {
+		trumpets_f[trumpet_id].trumpet_mode();
+		cout << "Данные трубы обновлены ... " << endl << endl;
+	}
+	else {
+		cout << "Трубы с данным идентификатором не существует ... " << endl << endl;
+	}
+}
+
+
+// Редактирвоание КС
+void update_ks(unordered_map<int, ks>& ks_f) {
+
+	int ks_id = input_value("Введите идентификатор КС: ", 0, 1000);
+
+	if (ks_f.count(ks_id) != 0) {
+		ks_f[ks_id].edit_ks();
+		cout << "Данные КС обновлены ... " << endl << endl;
+	}
+	else {
+		cout << "КС с данным идентификатором не существует ... " << endl << endl;
+	}
+
+}
+
+// Обновление и редактирование данных
+void update_objects(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
+
+	int small_choise = print_additional_menu("Труба", "КС");
+
+	if (small_choise == 0) {
+		cout << "Выполнен выход в начальное меню ... " << endl << endl;
+	}
+	else if (small_choise == 1) {
+		update_trumpet(trumpets_f);
+	}
+	else if (small_choise == 2) {
+		update_ks(ks_s_f);
+	}
+}
 
 // Чтение данных из файла
 void read_data(unordered_map<int, trumpet>& trumpets_f, unordered_map<int, ks>& ks_s_f) {
@@ -212,6 +258,7 @@ int main()
 		}
 
 		case 3: {
+			update_objects(trumpets, ks_s);
 			break;
 		}
 

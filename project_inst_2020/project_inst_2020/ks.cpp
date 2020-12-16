@@ -15,6 +15,11 @@ ks::ks() {
 	efficiency = 0;
 }
 
+void ks::edit_ks()
+{
+	active_workshops = input_value("¬ведите кол-во цехов в работе: ", 0, count_workshops);
+}
+
 
 std::istream& operator >> (std::istream& in, ks& cs)
 {

@@ -21,5 +21,6 @@ public:
 	friend std::ostream& operator << (std::ostream& out, const trumpet& s);
 	friend std::istream& operator >> (std::istream& in, trumpet& s);
 
+	void trumpet_mode();
 };
 

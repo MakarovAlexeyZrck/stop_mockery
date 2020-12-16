@@ -67,11 +67,46 @@ void gas_network::delete_trumpet(std::unordered_map<int, trumpet>& trumpet_data)
 {
 	int trumpets_id_for_delete = id_availability(trumpet_data, "Введите id трубы, которую хотите отключить: ");
 
+	// Поиск трубы 
 	bool was_found = false;
 	for (auto i : used_trumpets) {
 		if (trumpets_id_for_delete == i) {
 			was_found = true;
 			break;
+		}
+	}
+
+	if (trumpets_id_for_delete != -1 && was_found) {
+		for (int i = 0; i < topo_matrix.size(); i++) {
+			for (int j = 0; j < topo_matrix[i].size(); j++) {
+				if (cs_matr_pos[i] == trumpet_data[trumpets_id_for_delete].from && cs_matr_pos[j] == trumpet_data[trumpets_id_for_delete].to) {
+					topo_matrix[i][j] = 0;
+					used_trumpets.erase(trumpets_id_for_delete);
+				}
+			}
+		}
+	}
+	else {
+		cout << "Нет соединений для трубы с данным id";
+	}
+}
+
+void gas_network::sorted_matrix(unordered_map<int, trumpet>& trumpet_data)
+{
+	for (auto i : used_kss) {
+		cs_matr_pos.push_back(i);
+	}
+
+	const int m_size = cs_matr_pos.size();
+	topo_matrix.resize(m_size);
+
+	for (int i = 0; i < m_size; i++) {
+		topo_matrix[i].resize(m_size);
+
+		for (int j = 0; j < m_size; j++) {
+			for (auto p_id : used_trumpets) {
+				topo_matrix[i][j] = (cs_matr_pos[i] && trumpet_data[p_id].to == cs_matr_pos[j]) ? trumpet_data[p_id].get_weight() : 0;
+			}
 		}
 	}
 }

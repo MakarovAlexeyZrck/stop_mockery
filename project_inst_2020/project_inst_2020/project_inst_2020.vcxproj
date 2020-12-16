@@ -139,12 +139,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gas_network.cpp" />
     <ClCompile Include="ks.cpp" />
     <ClCompile Include="project_inst_2020.cpp" />
     <ClCompile Include="trumpet.cpp" />
     <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gas_network.h" />
     <ClInclude Include="ks.h" />
     <ClInclude Include="trumpet.h" />
     <ClInclude Include="utils.h" />

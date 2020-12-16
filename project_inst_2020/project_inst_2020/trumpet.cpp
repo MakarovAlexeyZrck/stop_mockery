@@ -48,3 +48,7 @@ istream& operator >> (istream& in, trumpet& t) {
 	return in;
 }
 
+
+int trumpet::get_weight() {
+	return length;
+}

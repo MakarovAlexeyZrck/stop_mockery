@@ -24,5 +24,6 @@ public:
 	friend std::istream& operator >> (std::istream& in, trumpet& s);
 
 	void trumpet_mode();
+	int get_weight();
 };
 

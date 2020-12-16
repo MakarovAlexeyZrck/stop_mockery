@@ -9,6 +9,9 @@
 
 using namespace std;
 
+// Меню для составляющей ЛР с сетью
+void network_menu();
+
 // Функция по проверке вводимого типа данных
 template <typename T>
 T input_value(string msg, T min, T max)
@@ -41,4 +44,28 @@ void delete_object(unordered_map<int, T1>& active_element) {
 	}
 
 }
+
+
+// Проверка на наличие объекта с идентификатором
+template <typename T>
+int id_availability(std::unordered_map<int, T> data, std::string user_msg) {
+
+	while (true) {
+
+		int research_id = input_value(user_msg, 0, 1000);
+
+		if (research_id == 0) {
+			break;
+		}
+
+		if (data.count(research_id) != 0) {
+			return research_id;
+		}
+	}
+	return -1;
+}
+
+class utils
+{
+};
 

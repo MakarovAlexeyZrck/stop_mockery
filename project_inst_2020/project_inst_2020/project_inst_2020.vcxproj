@@ -142,6 +142,7 @@
     <ClCompile Include="ks.cpp" />
     <ClCompile Include="project_inst_2020.cpp" />
     <ClCompile Include="trumpet.cpp" />
+    <ClCompile Include="utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ks.h" />

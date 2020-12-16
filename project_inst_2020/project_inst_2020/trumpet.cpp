@@ -11,6 +11,9 @@ trumpet::trumpet() {
 	length = 0;
 	diameter = 0;
 	is_broken = false;
+
+	from = 0;
+	to = 0;
 }
 
 trumpet::~trumpet() {

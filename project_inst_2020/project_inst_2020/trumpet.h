@@ -15,6 +15,8 @@ public:
 	double diameter;
 	bool is_broken = 0;
 
+	int from, to;
+
 	trumpet();
 	~trumpet();
 

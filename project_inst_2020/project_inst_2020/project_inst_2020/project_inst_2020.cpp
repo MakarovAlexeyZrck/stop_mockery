@@ -5,6 +5,7 @@
 #include "utils.h"
 #include "trumpet.h"
 #include "ks.h"
+#include "gas_network.h"
 
 using namespace std;
 
@@ -57,6 +58,7 @@ void print_menu() {
 		 << "7. Редактировать трубы пакетно" << "\n"
 		 << "8. Сохранить данные в файл" << "\n"
 		 << "9. Загрузить данные из файла" << "\n"
+		 << "10. Cеть" << endl
 		 << "0. Выйти" << endl;
 }
 
@@ -375,6 +377,8 @@ int main()
 
 	unordered_map<int, trumpet> trumpets;
 	unordered_map<int, ks> ks_s;
+	unordered_map<int, gas_network> Networks;
+
 
 	// Русский язык в консоли
 	setlocale(LC_ALL, "Russian");
@@ -386,7 +390,7 @@ int main()
 		print_menu();
 
 		// Обработка ввода пользователя
-		switch (input_value("--- Введите действие: ", 0, 9))
+		switch (input_value("--- Введите действие: ", 0, 10))
 		{
 
 		case 0: {
@@ -438,6 +442,49 @@ int main()
 
 		case 9: {
 			read_data(trumpets, ks_s);
+			break;
+		}
+
+		case 10: {
+			bool is_network_created = true;
+			while (true) {
+				network_menu();
+				int choice10 = input_value("Введите действие (0-5): ", 0, 5);
+				if (choice10 == 1) {
+					int id = gas_network::MaxID + 1;
+					Networks.emplace(id, gas_network());
+				}
+				else if (choice10 == 2) {
+					if (is_network_created) {
+						int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
+						Networks[selected_id].disassemble_pipes(trumpets, ks_s);
+					}
+					else {
+						cout << "Такой сети еще нет" << endl;
+					}
+				}
+				else if (choice10 == 3) {
+					if (is_network_created) {
+						int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
+						Networks[selected_id].delete_trumpet(trumpets);
+					}
+					else {
+						cout << "Такой сети еще нет" << endl;
+					}
+				}
+				else if (choice10 == 4) {
+					int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
+					Networks[selected_id].sorted_matrix(trumpets);
+				}
+				else if (choice10 == 5) {
+					int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
+					Networks[selected_id].Print_network();
+				}
+				else {
+					break;
+				}
+			}
+
 			break;
 		}
 

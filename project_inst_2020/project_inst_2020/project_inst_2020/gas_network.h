@@ -33,6 +33,8 @@ public:
 
 	void sorted_matrix(unordered_map<int, trumpet>& trumpet_data);
 
+	void Print_network();
+
 private:
 
 	int id;

@@ -37,7 +37,7 @@ int gas_network::get_id()
 
 void gas_network::disassemble_pipes(std::unordered_map<int, trumpet>& trumpet_data, std::unordered_map<int, ks>& ks_data)
 {
-	int cs_from = id_availability(ks_data, "Введите id КС от которого прокоадываем трубу: ");
+	int cs_from = id_availability(ks_data, "Введите id КС от которого проколадываем трубу: ");
 	int cs_to = id_availability(ks_data, "Введите id КС к которому  прокладываем трубу: ");
 	int used_trumpet_id = id_availability(trumpet_data, "Введите id используемой трубы: ");
 
@@ -108,5 +108,33 @@ void gas_network::sorted_matrix(unordered_map<int, trumpet>& trumpet_data)
 				topo_matrix[i][j] = (cs_matr_pos[i] && trumpet_data[p_id].to == cs_matr_pos[j]) ? trumpet_data[p_id].get_weight() : 0;
 			}
 		}
+	}
+}
+
+
+void gas_network::Print_network() {
+	cout << "Трубы: " << endl;
+	for (auto p : used_trumpets) {
+		cout << p << endl;
+	}
+	cout << "\nКомпрессорные станции: " << endl;
+
+	for (auto cs : used_kss) {
+		cout << cs << endl;
+	}
+
+	cout << "-------------------" << endl;
+	cout << "После сортировки:" << endl;
+	cout << "  ";
+	for (int i = 0; i <= cs_matr_pos.size() - 1; i++) {
+		cout << cs_matr_pos[i] << " ";
+	}
+	cout << endl;
+	for (int i = 0; i < cs_matr_pos.size(); i++) {
+		cout << cs_matr_pos[i] << " ";
+		for (int j = 0; j < cs_matr_pos.size(); j++) {
+			cout << topo_matrix[i][j] << " ";
+		}
+		cout << endl;
 	}
 }

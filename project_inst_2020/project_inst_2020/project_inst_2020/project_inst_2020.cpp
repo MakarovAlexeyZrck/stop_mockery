@@ -18,14 +18,13 @@ int main()
 
 	unordered_map<int, trumpet> trumpets;
 	unordered_map<int, ks> ks_s;
-	unordered_map<int, gas_network> Networks;
-
+	gas_network n;
 
 	// Русский язык в консоли
 	setlocale(LC_ALL, "Russian");
 
     // Управление программой
-    while (1) {
+	while (1) {
 
 		// Вывод меню действий
 		print_menu();
@@ -87,51 +86,37 @@ int main()
 		}
 
 		case 10: {
-			bool is_network_created = true;
-			while (true) {
+			bool running = true;
+			while (running) {
 				network_menu();
-				int choice10 = input_value("Введите действие (0-5): ", 0, 5);
-				if (choice10 == 1) {
-					int id = gas_network::MaxID + 1;
-					Networks.emplace(id, gas_network());
-				}
-				else if (choice10 == 2) {
-					if (is_network_created) {
-						int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
-						Networks[selected_id].disassemble_pipes(trumpets, ks_s);
-					}
-					else {
-						cout << "Такой сети еще нет" << endl;
-					}
-				}
-				else if (choice10 == 3) {
-					if (is_network_created) {
-						int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
-						Networks[selected_id].delete_trumpet(trumpets);
-					}
-					else {
-						cout << "Такой сети еще нет" << endl;
-					}
-				}
-				else if (choice10 == 4) {
-					int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
-					Networks[selected_id].sorted_matrix(trumpets);
-				}
-				else if (choice10 == 5) {
-					int selected_id = id_availability(Networks, "Введите id сети (0 - выйти): ");
-					Networks[selected_id].Print_network();
-				}
-				else {
+				switch (input_value("--- --- Введите действие: ", 0, 6))
+				{
+
+				case 0: {
+					running = false;
+					cout << endl << endl;
 					break;
 				}
+
+				case 1: {
+					n.create_connection(trumpets, ks_s);
+					break;
+				}
+
+				case 2: {
+					n.create_network(trumpets);
+					break;
+				}
+
+				case 3: {
+
+				}
+
+				}
 			}
-
-			break;
 		}
-
 		default:
 			cout << "Действие не поддерживается" << endl;
 		}
-    }
-
+	}
 }

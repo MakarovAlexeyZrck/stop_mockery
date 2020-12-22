@@ -7,9 +7,10 @@
 class trumpet
 {
 
+private:
+	int id;
 
 public:
-	int id;
 	static int MaxID;
 	double length;
 	double diameter;
@@ -18,12 +19,12 @@ public:
 	int from, to;
 
 	trumpet();
-	~trumpet();
 
 	friend std::ostream& operator << (std::ostream& out, const trumpet& s);
 	friend std::istream& operator >> (std::istream& in, trumpet& s);
 
 	void trumpet_mode();
 	int get_weight();
+	int GetId() const;
 };
 

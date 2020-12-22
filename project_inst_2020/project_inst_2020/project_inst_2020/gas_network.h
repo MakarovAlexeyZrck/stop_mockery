@@ -9,41 +9,27 @@
 #include <map>
 #include <unordered_map>
 #include <set>
+#include <stack>
 
-
-
-using namespace std;
 
 class gas_network
 {
+private:
+	unordered_map <int, int> mGtsKs;
+	unordered_map <int, trumpet> mGtsPipe;
+	map<pair<int, int>, int> network;
+	void DFS(int start, vector<int>& color, stack <int>& temp);
+
+	bool cycle_found;
 
 public:
+	set <int> GtsPipe;
+	set <int> GtsKs;
+	bool NetworkExist;
 
 	gas_network();
-	static int MaxID;
+	void create_connection(unordered_map<int, trumpet>& Pipeline_s, const unordered_map<int, ks>& Ks_s);
+	void create_network(const unordered_map<int, trumpet>& Pipeline_s);
 
-	void assign_name(const string& user_name);
-	void assign_id(int network_id);
-	string get_name();
-	int get_id();
-
-	void disassemble_pipes(
-		std::unordered_map<int, trumpet>& trumpet_data, std::unordered_map<int, ks>& ks_data);
-	void delete_trumpet(std::unordered_map<int, trumpet>& trumpet_data);
-
-	void sorted_matrix(unordered_map<int, trumpet>& trumpet_data);
-
-	void Print_network();
-
-private:
-
-	int id;
-	string network_name;
-
-	set<int> used_trumpets;
-	set<int> used_kss;
-
-	vector<std::vector<int>> topo_matrix;
-	vector<int> cs_matr_pos;
 };
 

@@ -83,7 +83,7 @@ void edit_slice_id(unordered_map<int, trumpet>& c_t) {
 	int counter = 0;
 	for (auto& item : c_t) {
 
-		if (item.second.id >= begin_slice && item.second.id <= end_slice) {
+		if (item.second.GetId() >= begin_slice && item.second.GetId() <= end_slice) {
 			item.second.trumpet_mode();
 		}
 		counter++;

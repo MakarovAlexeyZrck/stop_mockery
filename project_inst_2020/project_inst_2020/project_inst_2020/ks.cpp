@@ -20,6 +20,11 @@ void ks::edit_ks()
 	active_workshops = input_value("¬ведите кол-во цехов в работе: ", 0, count_workshops);
 }
 
+int ks::GetId() const
+{
+	return id;
+}
+
 
 std::istream& operator >> (std::istream& in, ks& cs)
 {

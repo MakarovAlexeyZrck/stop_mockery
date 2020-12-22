@@ -33,7 +33,7 @@ vector<int> FindObjectsByFilter(const unordered_map<int, T>& m, Filter<T, T_para
 
 template <class T>
 bool CheckByID(const T& p, int param) {
-	return p.id == param;
+	return p.GetId() == param;
 }
 
 bool CheckByIsBroken(const trumpet& p, bool param);

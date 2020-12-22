@@ -16,8 +16,6 @@ trumpet::trumpet() {
 	to = 0;
 }
 
-trumpet::~trumpet() {
-}
 
 void trumpet::trumpet_mode()
 {
@@ -51,4 +49,9 @@ istream& operator >> (istream& in, trumpet& t) {
 
 int trumpet::get_weight() {
 	return length;
+}
+
+int trumpet::GetId() const
+{
+	return id;
 }

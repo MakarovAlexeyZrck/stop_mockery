@@ -17,6 +17,7 @@ public:
 	double efficiency;
 
 	ks();
+	int GetId() const;
 
 	friend std::istream& operator >> (std::istream& in, ks& cs);
 	friend std::ostream& operator << (std::ostream& out, const ks& cs);

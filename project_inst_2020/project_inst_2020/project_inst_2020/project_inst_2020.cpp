@@ -110,7 +110,14 @@ int main()
 
 				case 3: {
 					n.show_network();
+					break;
 				}
+
+				case 4: {
+					n.topological_sort(trumpets);
+					break;
+				}
+
 
 				}
 			}

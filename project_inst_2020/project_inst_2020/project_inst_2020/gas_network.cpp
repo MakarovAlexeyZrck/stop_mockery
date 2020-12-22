@@ -132,6 +132,7 @@ void gas_network::show_network()
 }
 
 
+// Алгоритм поиска в глубину
 void gas_network::DFS(int start, vector<int>& color, stack <int>& answer_stack)
 {
 	color[start] = 1;
@@ -146,4 +147,72 @@ void gas_network::DFS(int start, vector<int>& color, stack <int>& answer_stack)
 	}
 	color[start] = 2;
 	answer_stack.push(start);
+}
+
+
+// Топологическая сортировка графа
+void gas_network::topological_sort(const unordered_map<int, trumpet>& Pipeline_s)
+{
+	if (NetworkExist)
+	{
+		stack <int> answer_stack;
+		vector<int> color;
+		unordered_map<int, int> answer;
+		color.clear();
+		answer.clear();
+		color.resize(GtsKs.size());
+		for (const auto& ver : mGtsKs)
+			(color[ver.first] == 0);
+		while (!answer_stack.empty())
+			answer_stack.pop();
+		int koren = -1;
+		for (const auto& line : mGtsKs)
+		{
+			int summa = 0;
+			for (const auto& column : mGtsKs)
+			{
+				summa += network[make_pair(column.first, line.first)];
+			}
+			bool not_isolated = false;
+			for (const auto& p : Pipeline_s)
+			{
+				if ((p.second.to == line.second) || (p.second.from == line.second))
+					not_isolated = true;
+			}
+			if ((summa == 0) && (not_isolated == true))
+			{
+				koren = line.first;
+				break;
+			}
+		}
+		if (koren == -1)
+		{
+			cout << "\nТопологическая сортировка невозможна, тк граф содержит цикл.\n";
+			return;
+		}
+		else
+		{
+			DFS(koren, color, answer_stack);
+			if (cycle_found)
+			{
+				cout << "\nТопологическая сортировка невозможна, тк граф содержит цикл.\n";
+				return;
+			}
+			else
+			{
+				int numeric = 1;
+				while (!answer_stack.empty())
+				{
+					auto iter = mGtsKs.find(answer_stack.top());
+					answer.insert(pair<int, int>(numeric, iter->second));
+					answer_stack.pop();
+					numeric++;
+				}
+				cout << "\nТопологическая сортировка выполнена:\n";
+				for (const auto& sort : answer)
+					cout << sort.first << " - " << sort.second << endl;
+			}
+		}
+	}
+	else cout << "Сеть еще не была создана.\n";
 }

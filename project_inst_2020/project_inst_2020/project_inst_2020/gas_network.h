@@ -31,5 +31,7 @@ public:
 	void create_connection(unordered_map<int, trumpet>& Pipeline_s, const unordered_map<int, ks>& Ks_s);
 	void create_network(const unordered_map<int, trumpet>& Pipeline_s);
 
+	void show_network();
+
 };
 

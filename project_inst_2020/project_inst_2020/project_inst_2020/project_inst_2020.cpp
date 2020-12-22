@@ -109,7 +109,7 @@ int main()
 				}
 
 				case 3: {
-
+					n.show_network();
 				}
 
 				}

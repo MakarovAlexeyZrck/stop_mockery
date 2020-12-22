@@ -33,7 +33,6 @@ public:
 	void topological_sort(const unordered_map<int, trumpet>& Pipeline_s);
 
 	void save_data(const unordered_map<int, trumpet>& Pipeline_s, const unordered_map<int, ks>& Ks_s);
-
 	void load_data(unordered_map<int, trumpet>& Pipeline_s, unordered_map<int, ks>& Ks_s);
 
 	void show_network();

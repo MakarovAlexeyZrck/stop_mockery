@@ -59,12 +59,12 @@ int trumpet::GetId() const
 
 ofstream& operator<<(ofstream& fout, const trumpet& p)
 {
-	fout << p.id << endl << p.length << endl << p.diameter << endl << p.is_broken << endl << p.from << endl << p.to << endl;
+	fout << p.id << endl << p.length << endl << p.diameter << endl << p.is_broken << endl << p.to << endl << p.from << endl;
 	return fout;
 }
 
 ifstream& operator>>(std::ifstream& fin, trumpet& p)
 {
-	fin >> p.id >> p.length >> p.diameter >> p.is_broken >> p.from >> p.to;
+	fin >> p.id >> p.length >> p.diameter >> p.is_broken >> p.to >> p.from;
 	return fin;
 }

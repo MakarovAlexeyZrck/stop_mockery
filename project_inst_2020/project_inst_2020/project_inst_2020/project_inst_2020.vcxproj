@@ -139,17 +139,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="another_features.cpp" />
+    <ClCompile Include="editor.cpp" />
+    <ClCompile Include="filters.cpp" />
     <ClCompile Include="gas_network.cpp" />
     <ClCompile Include="ks.cpp" />
     <ClCompile Include="project_inst_2020.cpp" />
     <ClCompile Include="trumpet.cpp" />
     <ClCompile Include="utils.cpp" />
+    <ClCompile Include="with_files_tasks.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="gas_network.h" />
-    <ClInclude Include="ks.h" />
     <ClInclude Include="trumpet.h" />
     <ClInclude Include="utils.h" />
+    <ClInclude Include="another_features.h" />
+    <ClInclude Include="editor.h" />
+    <ClInclude Include="filters.h" />
+    <ClInclude Include="gas_network.h" />
+    <ClInclude Include="ks.h" />
+    <ClInclude Include="with_files_tasks.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

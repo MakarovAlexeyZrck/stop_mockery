@@ -4,13 +4,15 @@
 #include <string>
 #include <unordered_map>
 
-#include "trumpet.h"
 #include "ks.h"
+#include "trumpet.h"
 
 using namespace std;
 
 // Меню для составляющей ЛР с сетью
 void network_menu();
+int print_additional_menu(string msg1, string msg2);
+void print_menu();
 
 // Функция по проверке вводимого типа данных
 template <typename T>

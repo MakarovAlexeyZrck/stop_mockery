@@ -6,11 +6,14 @@
 using namespace std;
 
 
+// Инициализация сети
 gas_network::gas_network() {
 	NetworkExist = false;
 	cycle_found = false;
 }
 
+
+// Создаем соединения
 void gas_network::create_connection(unordered_map<int, trumpet>& Pipeline_s, const unordered_map<int, ks>& Ks_s)
 {
 	if ((!Pipeline_s.size()) or (Ks_s.size() < 2))
@@ -56,6 +59,7 @@ void gas_network::create_connection(unordered_map<int, trumpet>& Pipeline_s, con
 }
 
 
+// Создаем сеть
 void gas_network::create_network(const unordered_map<int, trumpet>& Pipeline_s)
 {
 	int numKs = 0;
@@ -106,6 +110,7 @@ void gas_network::create_network(const unordered_map<int, trumpet>& Pipeline_s)
 }
 
 
+// Вывод созданной сети
 void gas_network::show_network()
 {
 	if (NetworkExist)
@@ -127,3 +132,18 @@ void gas_network::show_network()
 }
 
 
+void gas_network::DFS(int start, vector<int>& color, stack <int>& answer_stack)
+{
+	color[start] = 1;
+	for (const auto& ver : mGtsKs)
+	{
+		if (network[make_pair(start, ver.first)] != 0 && (color[ver.first] == 0))
+		{
+			DFS(ver.first, color, answer_stack);
+		}
+		else if (network[make_pair(start, ver.first)] != 0 && ((color[ver.first] == 1) || (color[ver.first] == 2)))
+			cycle_found = true;
+	}
+	color[start] = 2;
+	answer_stack.push(start);
+}

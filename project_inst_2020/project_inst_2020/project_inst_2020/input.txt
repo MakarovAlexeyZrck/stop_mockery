@@ -1,8 +1,0 @@
-t 2 4.2 0
-t 3 3.2 0
-t 4 2.2 0
-t 5 1.2 0
-ks test1 43 42 80
-ks test2 8 2 20
-ks test3 2 1 50
-ks test4 75 74 99

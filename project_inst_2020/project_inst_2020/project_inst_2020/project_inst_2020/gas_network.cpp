@@ -1,7 +1,15 @@
-#include "gas_network.h"
-
 #include <iostream>
-#include <string>
+#include <unordered_map>
+#include <fstream>
+
+#include "utils.h"
+#include "trumpet.h"
+#include "ks.h"
+#include "gas_network.h"
+#include "with_files_tasks.h"
+#include "editor.h"
+#include "another_features.h"
+#include "filters.h"
 
 using namespace std;
 
@@ -215,4 +223,86 @@ void gas_network::topological_sort(const unordered_map<int, trumpet>& Pipeline_s
 		}
 	}
 	else cout << "Сеть еще не была создана.\n";
+}
+
+
+void gas_network::save_data(const unordered_map<int, trumpet>& Pipeline_s, const unordered_map<int, ks>& Ks_s)
+{
+	if (NetworkExist)
+	{
+		cout << "Введите наименование файла, в которых хотите записать данные:     ";
+		string str;
+		cin >> str;
+
+		ofstream fout;
+		fout.open(string(str) + ".txt", ios::out);
+		if (fout.is_open())
+		{
+			fout << GtsPipe.size() << endl;
+			fout << GtsKs.size() << endl;
+			for (const auto& pipe : GtsPipe)
+				fout << pipe << endl;
+			for (const auto& ks : GtsKs)
+				fout << ks << endl;
+			for (const auto& pipe : GtsPipe)
+			{
+				auto IterPipe = Pipeline_s.find(pipe);
+				fout << IterPipe->second;
+			}
+			for (const auto& ks : GtsKs)
+			{
+				auto IterKs = Ks_s.find(ks);
+				fout << IterKs->second;
+			}
+			fout.close();
+			cout << "Данные сохранены ...\n";
+		}
+		else cout << "Проверьте наименование файла, открыть не удалось ...\n";
+	}
+	else cout << "Для начала создайте ГТС ...\n";
+}
+
+void gas_network::load_data(unordered_map<int, trumpet>& Pipeline_s, unordered_map<int, ks>& Ks_s)
+{
+	cout << "Введите наименование файла, из которого хотите извлечь данные:     ";
+	string str;
+	cin >> str;
+
+	ifstream fin;
+	fin.open(string(str) + ".txt", ios::in);
+	if (fin.is_open())
+	{
+		Pipeline_s.erase(Pipeline_s.begin(), Pipeline_s.end());
+		Ks_s.erase(Ks_s.begin(), Ks_s.end());
+		int numKs, numPipes;
+		fin >> numPipes;
+		fin >> numKs;
+		for (int i = 1; i <= numPipes; i++)
+		{
+			int prom;
+			fin >> prom;
+			GtsPipe.emplace(prom);
+		}
+		for (int i = 1; i <= numKs; i++)
+		{
+			int prom;
+			fin >> prom;
+			GtsKs.emplace(prom);
+		}
+		while (numPipes--)
+		{
+			trumpet p;
+			fin >> p;
+			Pipeline_s.insert(pair<int, trumpet>(p.GetId(), p));
+		}
+		while (numKs--)
+		{
+			ks k;
+			fin >> k;
+			Ks_s.insert(pair<int, ks>(k.GetId(), k));
+		}
+		fin.close();
+		cout << "Данные загружены ...\n";
+	}
+	else cout << "Проверьте наименование файла, открыть не удалось ...\n";
 }

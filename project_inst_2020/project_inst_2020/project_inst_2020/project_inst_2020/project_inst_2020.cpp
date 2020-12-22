@@ -118,6 +118,15 @@ int main()
 					break;
 				}
 
+				case 5: {
+					n.load_data(trumpets, ks_s);
+					n.create_network(trumpets);
+					break;
+				}
+
+				case 6: {
+					n.save_data(trumpets, ks_s);
+				}
 
 				}
 			}

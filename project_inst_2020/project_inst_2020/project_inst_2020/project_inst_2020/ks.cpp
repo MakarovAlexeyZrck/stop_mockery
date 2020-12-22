@@ -1,5 +1,6 @@
 #include "ks.h"
 #include "utils.h"
+#include <limits>
 
 using namespace std;
 
@@ -51,4 +52,20 @@ std::ostream& operator << (std::ostream& out, const ks& cs)
 
 	return out;
 
+}
+
+
+ofstream& operator<<(ofstream& fout, const ks& k)
+{
+	fout << k.id << endl << k.ks_name << endl << k.count_workshops << endl << k.active_workshops << endl << k.efficiency << endl;
+	return fout;
+}
+
+ifstream& operator>>(ifstream& fin, ks& k)
+{
+	fin >> k.id;
+	fin.ignore(1, '\n');
+	getline(fin, k.ks_name);
+	fin >> k.count_workshops >> k.active_workshops >> k.efficiency;
+	return fin;
 }

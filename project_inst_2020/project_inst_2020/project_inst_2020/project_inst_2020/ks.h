@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
 
 class ks
 {
@@ -21,6 +22,8 @@ public:
 
 	friend std::istream& operator >> (std::istream& in, ks& cs);
 	friend std::ostream& operator << (std::ostream& out, const ks& cs);
+	friend std::ofstream& operator << (std::ofstream& fout, const ks& k);
+	friend std::ifstream& operator >> (std::ifstream& fin, ks& k);
 
 	void edit_ks();
 

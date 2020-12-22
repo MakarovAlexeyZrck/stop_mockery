@@ -1,44 +1,4 @@
-# Prerequisites
-*.d
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
-*.ipch
-*.db-wal
-*.opendb
-*.db-shm
-*.db
-*.pdb
-*.idb
-*.tlog
 project_inst_2020/.vs/project_inst_2020/v16/.suo
-*.ilk
-*.recipe
-*.log
+*.txt
+*.txt

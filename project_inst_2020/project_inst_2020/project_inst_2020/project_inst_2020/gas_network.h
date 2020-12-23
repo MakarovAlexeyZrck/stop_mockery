@@ -38,6 +38,12 @@ public:
 	void KsDelChanges(int id, unordered_map<int, trumpet>& Pipeline_s);
 	void PipeDelChanges(int id);
 
+	void way_founder(int vertex, stack<int>& way, const vector<int>& distance);
+
+	void short_dist();
+
+	int vertex_founder(string str);
+
 	void show_network();
 
 };

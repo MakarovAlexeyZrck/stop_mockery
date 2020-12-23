@@ -30,7 +30,7 @@ int main()
 		print_menu();
 
 		// Обработка ввода пользователя
-		switch (input_value("--- Введите действие: ", 0, 10))
+		switch (input_value("--- Введите действие: ", 0, 12))
 		{
 
 		case 0: {
@@ -85,6 +85,11 @@ int main()
 			break;
 		}
 
+		case 11: {
+			n.short_dist();
+			break;
+		}
+
 		case 10: {
 			bool running = true;
 			while (running) {
@@ -126,11 +131,13 @@ int main()
 
 				case 6: {
 					n.save_data(trumpets, ks_s);
+					break;
 				}
 
 				}
 			}
 		}
+
 		default:
 			cout << "Действие не поддерживается" << endl;
 		}

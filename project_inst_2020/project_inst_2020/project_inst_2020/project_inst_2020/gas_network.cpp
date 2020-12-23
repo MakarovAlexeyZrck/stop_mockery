@@ -347,3 +347,118 @@ void gas_network::PipeDelChanges(int id)
 			IterPipe++;
 	}
 }
+
+
+void gas_network::way_founder(int vertex, stack<int>& way, const vector <int>& distance)
+{
+	way.push(vertex);
+	if (distance[vertex] == 0)
+	{
+		return;
+	}
+	else
+		for (int i = 0; i <= (int)GtsKs.size() - 1; i++)
+		{
+			if (distance[vertex] == network[make_pair(i, vertex)])
+			{
+				way.push(i);
+				return;
+			}
+			else if ((distance[vertex] - network[make_pair(i, vertex)] == distance[i]) && i != vertex)
+				way_founder(i, way, distance);
+		}
+}
+
+void gas_network::short_dist()
+{
+	if (NetworkExist)
+	{
+		int start = vertex_founder("\nВведите от какой КС ищем путь: ");
+		int end = vertex_founder("\nВведите к которой КС ищем путь: ");
+		if ((start == -1) || (end == -1))
+		{
+			cout << "Введенное число недействительно.\n";
+			return;
+		}
+		else
+		{
+			vector <int> distance;
+			vector <int> visited;
+			stack <int> way;
+			while (!way.empty())
+				way.pop();
+			distance.reserve(GtsKs.size());
+			visited.reserve(GtsKs.size());
+			for (int i = 0; i <= (int)GtsKs.size() - 1; i++)
+			{
+				distance.push_back(INT_MAX);
+				visited.push_back(0);
+			}
+			int indexstart = 0;
+			int indexend = 0;
+			for (const auto& m : mGtsKs)
+			{
+				if (m.second == start)
+					indexstart = m.first;
+				if (m.second == end)
+					indexend = m.first;
+			}
+			distance[indexstart] = 0;
+			int index = 0;
+			for (int count = 0; count < (int)GtsKs.size() - 1; count++)
+			{
+				int min = INT_MAX;
+				for (int i = 0; i < (int)GtsKs.size(); i++)
+					if (!visited[i] && distance[i] <= min)
+					{
+						min = distance[i];
+						index = i;
+					}
+				visited[index] = 1;
+				for (int i = 0; i < (int)GtsKs.size(); i++)
+					if (!visited[i] && network[make_pair(index, i)] && distance[index] != INT_MAX &&
+						distance[index] + network[make_pair(index, i)] < distance[i])
+						distance[i] = distance[index] + network[make_pair(index, i)];
+			}
+			cout << "\nВычисленный кратчайший путь:\n\n";
+			if (distance[indexend] != INT_MAX)
+			{
+				cout << start << " > " << end << " = " << distance[indexend];
+				cout << endl;
+				if (distance[indexend] != 0)
+				{
+					cout << "Путь: ";
+					way_founder(indexend, way, distance);
+					auto iter = mGtsKs.find(way.top());
+					way.pop();
+					cout << iter->second;
+					while (!way.empty())
+					{
+						iter = mGtsKs.find(way.top());
+						way.pop();
+						cout << "->" << iter->second;
+					}
+					cout << endl;
+				}
+				cout << endl;
+			}
+			else cout << start << " > " << end << " = " << "Пути не существует" << endl << endl;
+		}
+	}
+	else cout << "Для начала создается ГТС.\n";
+}
+
+int gas_network::vertex_founder(string str)
+{
+	vector <int> vershina;
+	vershina.reserve(GtsKs.size());
+	for (const auto& v : GtsKs)
+		vershina.push_back(v);
+	int vertex = input_value(str, 1, ks::MaxID);
+	auto got = find(vershina.begin(), vershina.end(), vertex);
+	if (got == vershina.end())
+	{
+		return -1;
+	}
+	return vertex;
+}

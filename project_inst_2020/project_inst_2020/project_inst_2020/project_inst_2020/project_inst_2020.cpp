@@ -51,12 +51,12 @@ int main()
 		}
 
 		case 3: {
-			update_objects(trumpets, ks_s);
+			update_objects(trumpets, ks_s, n);
 			break;
 		}
 
 		case 4: {
-			delete_controller(trumpets, ks_s);
+			delete_controller(trumpets, ks_s, n);
 			break;
 		}
 

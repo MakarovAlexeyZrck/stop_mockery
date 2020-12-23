@@ -306,3 +306,44 @@ void gas_network::load_data(unordered_map<int, trumpet>& Pipeline_s, unordered_m
 	}
 	else cout << "Проверьте наименование файла, открыть не удалось ...\n";
 }
+
+
+void gas_network::KsDelChanges(int id, unordered_map <int, trumpet>& Pipeline_s)
+{
+	for (auto IterKs = GtsKs.begin(); IterKs != GtsKs.end();)
+	{
+		if (*IterKs == id)
+		{
+			GtsKs.erase(IterKs++);
+			for (auto& p : Pipeline_s)
+			{
+				if ((p.second.from == id) || (p.second.to == id))
+				{
+					p.second.to = 0;
+					p.second.from = 0;
+					for (auto IterPipe = GtsPipe.begin(); IterPipe != GtsPipe.end();)
+					{
+						if (*IterPipe == p.second.GetId())
+							GtsPipe.erase(IterPipe++);
+						else
+							IterPipe++;
+
+					}
+				}
+			}
+		}
+		else
+			IterKs++;
+	}
+}
+
+void gas_network::PipeDelChanges(int id)
+{
+	for (auto IterPipe = GtsPipe.begin(); IterPipe != GtsPipe.end();)
+	{
+		if (*IterPipe == id)
+			GtsPipe.erase(IterPipe++);
+		else
+			IterPipe++;
+	}
+}

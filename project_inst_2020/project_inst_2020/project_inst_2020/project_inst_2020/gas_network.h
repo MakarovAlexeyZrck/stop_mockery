@@ -35,6 +35,9 @@ public:
 	void save_data(const unordered_map<int, trumpet>& Pipeline_s, const unordered_map<int, ks>& Ks_s);
 	void load_data(unordered_map<int, trumpet>& Pipeline_s, unordered_map<int, ks>& Ks_s);
 
+	void KsDelChanges(int id, unordered_map<int, trumpet>& Pipeline_s);
+	void PipeDelChanges(int id);
+
 	void show_network();
 
 };

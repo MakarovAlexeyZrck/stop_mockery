@@ -18,6 +18,9 @@ public:
 
 	int from, to;
 
+	int Weight;
+	int Throughput;
+
 	trumpet();
 
 	friend std::ostream& operator << (std::ostream& out, const trumpet& s);
@@ -26,7 +29,8 @@ public:
 	friend std::ifstream& operator >> (std::ifstream& fin, trumpet& p);
 
 	void trumpet_mode();
-	int get_weight();
 	int GetId() const;
+	int GetThroughput() const;
+	int GetWeight() const;
 };
 

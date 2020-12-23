@@ -86,7 +86,12 @@ int main()
 		}
 
 		case 11: {
-			n.short_dist();
+			n.ShortDist();
+			break;
+		}
+
+		case 12: {
+			n.MaxFlow();
 			break;
 		}
 
@@ -104,33 +109,33 @@ int main()
 				}
 
 				case 1: {
-					n.create_connection(trumpets, ks_s);
+					n.CreateConnection(trumpets, ks_s);
 					break;
 				}
 
 				case 2: {
-					n.create_network(trumpets);
+					n.CreateNetwork(trumpets);
 					break;
 				}
 
 				case 3: {
-					n.show_network();
+					n.PrintNetwork();
 					break;
 				}
 
 				case 4: {
-					n.topological_sort(trumpets);
+					n.TopolSort(trumpets);
 					break;
 				}
 
 				case 5: {
-					n.load_data(trumpets, ks_s);
-					n.create_network(trumpets);
+					n.LoadNetwork(trumpets, ks_s);
+					n.CreateNetwork(trumpets);
 					break;
 				}
 
 				case 6: {
-					n.save_data(trumpets, ks_s);
+					n.SaveNetwork(trumpets, ks_s);
 					break;
 				}
 

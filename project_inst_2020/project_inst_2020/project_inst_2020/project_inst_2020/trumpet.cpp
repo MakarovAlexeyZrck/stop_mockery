@@ -1,6 +1,8 @@
 #include "trumpet.h"
 #include "utils.h"
 
+#include <limits>
+#include <cmath>
 
 using namespace std;
 int trumpet::MaxID = 0;
@@ -14,12 +16,25 @@ trumpet::trumpet() {
 
 	from = 0;
 	to = 0;
+
+	Weight = 0;
+	Throughput = 0;
 }
 
 
 void trumpet::trumpet_mode()
 {
 	is_broken = !is_broken;
+}
+
+int trumpet::GetThroughput() const
+{
+	return (int)sqrt(pow(diameter, 5) / length);
+}
+
+int trumpet::GetWeight() const
+{
+	return (int)length;
 }
 
 ostream& operator << (ostream& out, const trumpet& t)
@@ -47,10 +62,6 @@ istream& operator >> (istream& in, trumpet& t) {
 }
 
 
-int trumpet::get_weight() {
-	return length;
-}
-
 int trumpet::GetId() const
 {
 	return id;
@@ -59,12 +70,12 @@ int trumpet::GetId() const
 
 ofstream& operator<<(ofstream& fout, const trumpet& p)
 {
-	fout << p.id << endl << p.length << endl << p.diameter << endl << p.is_broken << endl << p.to << endl << p.from << endl;
+	fout << p.id << endl << p.length << endl << p.diameter << endl << p.is_broken << endl << p.to << endl << p.from << endl << endl << p.Weight << endl << p.Throughput << endl;;
 	return fout;
 }
 
 ifstream& operator>>(std::ifstream& fin, trumpet& p)
 {
-	fin >> p.id >> p.length >> p.diameter >> p.is_broken >> p.to >> p.from;
+	fin >> p.id >> p.length >> p.diameter >> p.is_broken >> p.from >> p.to >> p.Weight >> p.Throughput;;
 	return fin;
 }
